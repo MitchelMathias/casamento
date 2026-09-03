@@ -1,7 +1,9 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
-import ContributionModal from "@/components/ContributionModal";
+
+const ContributionModal = dynamic(() => import("@/components/ContributionModal"), { ssr: false });
 
 const footerLinks = [
   { label: "Início", href: "#inicio" },

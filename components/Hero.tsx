@@ -2,11 +2,13 @@
 
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import HalftoneBackground from "@/components/HalftoneBackground";
-import ContributionModal from "@/components/ContributionModal";
-import Modal from "@/components/Modal";
+
+const ContributionModal = dynamic(() => import("@/components/ContributionModal"), { ssr: false });
+const Modal = dynamic(() => import("@/components/Modal"), { ssr: false });
 
 const details = [
   { icon: "◷", label: "Quando", text: "Marcando em Setembro · Casamento em Dezembro" },

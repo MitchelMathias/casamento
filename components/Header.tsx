@@ -1,10 +1,12 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import ContributionModal from "@/components/ContributionModal";
-import ChurrascoModal from "@/components/ChurrascoModal";
-import QuestionsModal from "@/components/QuestionsModal";
+
+const ContributionModal = dynamic(() => import("@/components/ContributionModal"), { ssr: false });
+const ChurrascoModal = dynamic(() => import("@/components/ChurrascoModal"), { ssr: false });
+const QuestionsModal = dynamic(() => import("@/components/QuestionsModal"), { ssr: false });
 
 const links = [
   { label: "Churrasco", href: "#churrasco" },
