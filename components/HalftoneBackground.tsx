@@ -23,7 +23,7 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const context = canvas.getContext("2d", { alpha: true });
+    const context = canvas.getContext("2d", { alpha: true, desynchronized: true });
     if (!context) return;
 
     let width = 0;
@@ -33,20 +33,22 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
     let isPageVisible = document.visibilityState === "visible";
     let reducedMotion = false;
     const isWindows = /Windows/i.test(navigator.userAgent);
-    const animateCanvas = !isWindows;
+    const animateCanvas = true;
     let points: HalftonePoint[] = [];
+    let spacingOverride = 19;
+    let slowFrames = 0;
     const startedAt = performance.now();
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+      const pixelRatio = isWindows ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
       width = Math.max(1, Math.floor(bounds.width));
       height = Math.max(1, Math.floor(bounds.height));
       canvas.width = Math.floor(width * pixelRatio);
       canvas.height = Math.floor(height * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
-      const spacing = width < 640 ? 16 : 19;
+      const spacing = Math.max(width < 640 ? 16 : 19, spacingOverride);
       const columns = Math.ceil(width / spacing) + 2;
       const rows = Math.ceil(height / spacing) + 2;
       const centerX = width * 0.57;
@@ -76,6 +78,7 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
     };
 
     const draw = (now: number) => {
+      const drawStartedAt = performance.now();
       const elapsed = reducedMotion ? 0 : (now - startedAt) * 0.00045;
       const paths = Array.from({ length: 12 }, () => new Path2D());
 
@@ -104,10 +107,20 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
       }
       context.globalAlpha = 1;
 
+      if (isWindows && performance.now() - drawStartedAt > 12) {
+        slowFrames += 1;
+        if (slowFrames >= 8 && spacingOverride < 25) {
+          spacingOverride = 25;
+          resize();
+        }
+      } else if (performance.now() - drawStartedAt < 7) {
+        slowFrames = Math.max(0, slowFrames - 1);
+      }
+
       if (animateCanvas && !reducedMotion && isPageVisible) {
         animationTimer = window.setTimeout(() => {
           animationFrame = requestAnimationFrame(draw);
-        }, 32);
+        }, 22);
       }
 
     };
@@ -115,6 +128,7 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
     draw(performance.now());
     const resizeObserver = new ResizeObserver(() => {
       window.clearTimeout(animationTimer);
+      cancelAnimationFrame(animationFrame);
       resize();
       draw(performance.now());
     });

@@ -86,7 +86,7 @@ export default function Header() {
           : "border-transparent bg-[#FAFAF7]/62 backdrop-blur-md"
       }`}
     >
-      <div className="header-glass__glow" aria-hidden="true" />
+      <div className="header-glass__glow performance-ambient-blur" aria-hidden="true" />
       <motion.div
         style={headerParallax}
         className="relative mx-auto flex h-[76px] max-w-6xl items-center justify-between px-5 will-change-transform sm:px-8 lg:px-10"

@@ -106,14 +106,14 @@ export default function Hero() {
         style={{ x: backgroundX, y: backgroundY }}
         animate={{ scale: [1, 1.08, 1], rotate: [0, 6, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -right-40 -top-24 -z-10 h-[28rem] w-[28rem] rounded-[42%_58%_65%_35%] bg-[#D97736]/14 blur-3xl"
+        className="performance-ambient-blur pointer-events-none absolute -right-40 -top-24 -z-10 h-[28rem] w-[28rem] rounded-[42%_58%_65%_35%] bg-[#D97736]/14 blur-3xl"
         aria-hidden="true"
       />
       <motion.div
         style={{ x: oliveX, y: oliveY }}
         animate={{ scale: [1, 0.92, 1], rotate: [0, -10, 0] }}
         transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -bottom-48 -left-40 -z-10 h-[34rem] w-[34rem] rounded-[65%_35%_42%_58%] bg-[#556B2F]/12 blur-3xl"
+        className="performance-ambient-blur pointer-events-none absolute -bottom-48 -left-40 -z-10 h-[34rem] w-[34rem] rounded-[65%_35%_42%_58%] bg-[#556B2F]/12 blur-3xl"
         aria-hidden="true"
       />
       <div className="hero-grain pointer-events-none absolute inset-0 -z-10 opacity-30" aria-hidden="true" />
