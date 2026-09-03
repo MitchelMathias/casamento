@@ -20,6 +20,9 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
     let width = 0;
     let height = 0;
     let reducedMotion = false;
+    let isPageVisible = document.visibilityState === "visible";
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const lowPowerDevice = (navigator.hardwareConcurrency || 4) <= 4 || connection?.saveData === true;
     const startedAt = performance.now();
 
     const resize = () => {
@@ -34,7 +37,7 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
 
     const draw = (now: number) => {
       const elapsed = reducedMotion ? 0 : (now - startedAt) * 0.00045;
-      const spacing = width < 640 ? 13 : 16;
+      const spacing = width < 640 ? 16 : 19;
       const columns = Math.ceil(width / spacing) + 2;
       const rows = Math.ceil(height / spacing) + 2;
       const centerX = width * 0.57;
@@ -71,15 +74,25 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
       }
 
       context.globalAlpha = 1;
-      animationFrame = requestAnimationFrame(draw);
+      if (!reducedMotion && !lowPowerDevice && isPageVisible) {
+        animationFrame = requestAnimationFrame(draw);
+      }
     };
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     reducedMotion = motionQuery.matches;
     const handleMotionPreference = () => {
       reducedMotion = motionQuery.matches;
+      cancelAnimationFrame(animationFrame);
+      draw(performance.now());
+    };
+    const handleVisibilityChange = () => {
+      isPageVisible = document.visibilityState === "visible";
+      cancelAnimationFrame(animationFrame);
+      if (isPageVisible) draw(performance.now());
     };
     motionQuery.addEventListener("change", handleMotionPreference);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     resize();
     const resizeObserver = new ResizeObserver(resize);
@@ -90,6 +103,7 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
       cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
       motionQuery.removeEventListener("change", handleMotionPreference);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 

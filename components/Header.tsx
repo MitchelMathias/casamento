@@ -40,6 +40,10 @@ function useHeaderParallax() {
   const smoothY = useSpring(pointerY, { stiffness: 100, damping: 20, mass: 0.4 });
 
   useEffect(() => {
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!canHover.matches || reducedMotion.matches) return;
+
     const handlePointerMove = (event: PointerEvent) => {
       pointerX.set((event.clientX / window.innerWidth - 0.5) * 2);
       pointerY.set((event.clientY / window.innerHeight - 0.5) * 2);

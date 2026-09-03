@@ -35,6 +35,10 @@ function useMouseParallax() {
   const smoothY = useSpring(mouseY, { stiffness: 95, damping: 18, mass: 0.42 });
 
   useEffect(() => {
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!canHover.matches || reducedMotion.matches) return;
+
     const handlePointerMove = (event: PointerEvent) => {
       mouseX.set((event.clientX / window.innerWidth - 0.5) * 2);
       mouseY.set((event.clientY / window.innerHeight - 0.5) * 2);
@@ -230,7 +234,7 @@ export default function Hero() {
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   className="absolute inset-0"
                 >
-                  <Image src={`/images/${galleryImages[activeImage]}.jpeg`} alt={`Foto ${activeImage + 1} de ${galleryImages.length} do casal`} fill sizes="(max-width: 640px) 94vw, 832px" quality={100} className="object-contain" priority={activeImage === 1} />
+                  <Image src={`/images/${galleryImages[activeImage]}.jpeg`} alt={`Foto ${activeImage + 1} de ${galleryImages.length} do casal`} fill sizes="(max-width: 640px) 94vw, 832px" quality={82} className="object-contain" priority={activeImage === 1} />
                 </motion.div>
               </AnimatePresence>
               <button type="button" onClick={showPreviousImage} aria-label="Foto anterior" className="absolute left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-[#2B2B2B]/45 text-2xl text-white backdrop-blur-md transition hover:bg-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">←</button>

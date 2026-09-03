@@ -43,7 +43,7 @@ export default function ChurrascoModal({ isOpen, onClose }: ChurrascoModalProps)
             className="mobile-modal-panel relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/70 bg-[#FAFAF7] text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.35)]"
           >
             <div className="relative h-[min(58svh,31rem)] w-full bg-[#2B2B2B]">
-              <Image src="/images/Churrasco.png" alt="Churrasco que ainda vamos preparar" fill sizes="(max-width: 640px) 100vw, 672px" quality={100} className="object-contain" />
+              <Image src="/images/Churrasco.png" alt="Churrasco que ainda vamos preparar" fill sizes="(max-width: 640px) 100vw, 672px" quality={82} className="object-contain" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2B2B2B]/65 via-transparent to-transparent" />
               <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar modal do churrasco" className="modal-close-button absolute right-5 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/70 bg-[#2B2B2B]/40 text-2xl text-white backdrop-blur-md transition hover:rotate-90 hover:bg-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">×</button>
             </div>
