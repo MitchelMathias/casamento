@@ -202,7 +202,7 @@ export default function Hero() {
         <AnimatePresence>
         {imageExpanded && (
           <motion.div
-            className="fixed inset-0 z-[110] flex items-center justify-center bg-[#2B2B2B]/75 p-5 backdrop-blur-md sm:p-10"
+            className="mobile-image-backdrop fixed inset-0 z-[110] flex items-center justify-center bg-[#2B2B2B]/75 p-5 backdrop-blur-md sm:p-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

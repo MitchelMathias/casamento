@@ -32,7 +32,7 @@ export default function ChurrascoModal({ isOpen, onClose }: ChurrascoModalProps)
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[130] flex items-center justify-center bg-[#2B2B2B]/75 p-5 backdrop-blur-md sm:p-8"
+          className="mobile-modal-backdrop fixed inset-0 z-[130] flex items-center justify-center bg-[#2B2B2B]/75 p-5 backdrop-blur-md sm:p-8"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}
         >
@@ -40,7 +40,7 @@ export default function ChurrascoModal({ isOpen, onClose }: ChurrascoModalProps)
             role="dialog" aria-modal="true" aria-labelledby="churrasco-title"
             initial={{ opacity: 0, scale: 0.92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/70 bg-[#FAFAF7] text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.35)]"
+            className="mobile-modal-panel relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-white/70 bg-[#FAFAF7] text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.35)]"
           >
             <div className="relative h-[min(58svh,31rem)] w-full bg-[#2B2B2B]">
               <Image src="/images/Churrasco.png" alt="Churrasco que ainda vamos preparar" fill sizes="(max-width: 640px) 100vw, 672px" quality={100} className="object-contain" />

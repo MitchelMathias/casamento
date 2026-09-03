@@ -35,7 +35,7 @@ export default function ContributionModal({ isOpen, onClose }: ContributionModal
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[130] flex items-center justify-center bg-[#2B2B2B]/70 p-5 backdrop-blur-md sm:p-8"
+          className="mobile-modal-backdrop fixed inset-0 z-[130] flex items-center justify-center bg-[#2B2B2B]/70 p-5 backdrop-blur-md sm:p-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -52,7 +52,7 @@ export default function ContributionModal({ isOpen, onClose }: ContributionModal
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 14, scale: 0.96 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/70 bg-[#FAFAF7] p-6 text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.32)] sm:p-9"
+            className="mobile-modal-panel relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/70 bg-[#FAFAF7] p-6 text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.32)] sm:p-9"
           >
             <div className="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full bg-[#D97736]/15 blur-3xl" aria-hidden="true" />
             <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar contribuição" className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-[#D8CDBD] text-xl text-[#5E5E5E] transition hover:rotate-90 hover:border-[#D97736] hover:text-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D97736]">×</button>

@@ -44,7 +44,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#2B2B2B]/55 p-5 backdrop-blur-md sm:p-8"
+          className="mobile-modal-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-[#2B2B2B]/55 p-5 backdrop-blur-md sm:p-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -63,7 +63,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 14 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/70 bg-[#FAFAF7] p-6 text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.28)] sm:p-9"
+            className="mobile-modal-panel relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/70 bg-[#FAFAF7] p-6 text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.28)] sm:p-9"
           >
             <div className="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full bg-[#D97736]/12 blur-3xl" aria-hidden="true" />
             <div className="relative">

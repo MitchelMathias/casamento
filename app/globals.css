@@ -38,6 +38,35 @@ html {
   }
 }
 
+/* Modais mobile: o body fica travado enquanto o conteúdo aberto continua
+   rolável com o dedo, sem alterar o comportamento em telas maiores. */
+@media (max-width: 639px) {
+  .mobile-modal-backdrop {
+    align-items: flex-start;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-modal-panel {
+    max-height: calc(100dvh - max(2rem, env(safe-area-inset-top) + env(safe-area-inset-bottom) + 2rem));
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-image-backdrop {
+    overscroll-behavior: contain;
+    touch-action: none;
+  }
+}
+
 .hero-grain {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
