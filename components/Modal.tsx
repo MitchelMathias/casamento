@@ -73,7 +73,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                   <h2 id="ranking-title" className="mt-3 font-syne text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">Rank Presentes</h2>
                   <p id="ranking-description" className="mt-3 max-w-sm font-inter text-sm leading-6 text-[#5E5E5E]">Os presentes.</p>
                 </div>
-                <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar ranking de presentes" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D8CDBD] text-[#5E5E5E] transition-all hover:rotate-90 hover:border-[#D97736] hover:text-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D97736]">
+                <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar ranking de presentes" className="modal-close-button relative z-20 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D8CDBD] text-[#5E5E5E] transition-all hover:rotate-90 hover:border-[#D97736] hover:text-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D97736]">
                   <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
                     <path d="m4 4 12 12M16 4 4 16" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
                   </svg>

@@ -5,7 +5,6 @@ import ContributionModal from "@/components/ContributionModal";
 
 const footerLinks = [
   { label: "Início", href: "#inicio" },
-  { label: "Nossa história", href: "#historia" },
   { label: "Pix", href: "#pix" },
 ];
 

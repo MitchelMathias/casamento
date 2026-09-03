@@ -23,7 +23,7 @@ const sections = [
     eyebrow: "Em números",
     content: (
       <div className="grid gap-3 sm:grid-cols-2">
-        {[ ["∞", "litros de café"], ["42k", "De pensamentos de quanto vai faltas ksksk"], ["03", "meses entendendo o contrato"], ["07", "panelas arremessadas na simulação"] ].map(([value, label]) => <div key={label} className="rounded-xl border border-[#E5DDCF] bg-white/60 p-4"><span className="font-syne text-3xl font-semibold text-[#D97736]">{value}</span><p className="mt-2 font-inter text-xs leading-5 text-[#5E5E5E]">{label}</p></div>)}
+        {[ ["∞", "Litros de café"], ["42k", "De pensamentos de quanto vai faltar ksksk"], ["03", "Meses entendendo o contrato"], ["07", "Panelas arremessadas na simulação"] ].map(([value, label]) => <div key={label} className="rounded-xl border border-[#E5DDCF] bg-white/60 p-4"><span className="font-syne text-3xl font-semibold text-[#D97736]">{value}</span><p className="mt-2 font-inter text-xs leading-5 text-[#5E5E5E]">{label}</p></div>)}
       </div>
     ),
   },
@@ -80,7 +80,7 @@ export default function QuestionsModal({ isOpen, onClose }: QuestionsModalProps)
     <AnimatePresence>
       {isOpen && <motion.div className="mobile-modal-backdrop fixed inset-0 z-[130] flex items-center justify-center bg-[#2B2B2B]/75 p-4 backdrop-blur-md sm:p-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
         <motion.div role="dialog" aria-modal="true" aria-labelledby="questions-title" initial={{ opacity: 0, scale: 0.94, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: 12 }} transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }} className="mobile-modal-panel relative max-h-[90svh] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-white/70 bg-[#FAFAF7] p-6 text-[#2B2B2B] shadow-[0_30px_90px_rgba(24,20,16,0.35)] sm:p-9">
-          <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar possíveis perguntas" className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-[#D8CDBD] text-xl text-[#5E5E5E] transition hover:rotate-90 hover:border-[#D97736] hover:text-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D97736]">×</button>
+          <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar possíveis perguntas" className="modal-close-button absolute right-5 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-[#D8CDBD] text-xl text-[#5E5E5E] transition hover:rotate-90 hover:border-[#D97736] hover:text-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D97736]">×</button>
           <span className="font-inter text-[10px] font-semibold uppercase tracking-[0.24em] text-[#D97736]">Manual não oficial</span>
           <h2 id="questions-title" className="mt-3 max-w-lg font-syne text-3xl font-semibold leading-tight tracking-[-0.05em] sm:text-4xl">Possíveis perguntas.</h2>
           <p className="mt-3 max-w-xl font-inter text-sm leading-6 text-[#5E5E5E]">Tudo o que você precisa saber sobre a mudança, o churrasco e as decisões questionáveis que nos trouxeram até aqui.</p>

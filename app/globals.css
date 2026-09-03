@@ -41,6 +41,13 @@ html {
 /* Modais mobile: o body fica travado enquanto o conteúdo aberto continua
    rolável com o dedo, sem alterar o comportamento em telas maiores. */
 @media (max-width: 639px) {
+  .modal-close-button {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .mobile-modal-backdrop {
     align-items: flex-start;
     overflow-y: auto;

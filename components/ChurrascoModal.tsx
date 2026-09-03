@@ -45,7 +45,7 @@ export default function ChurrascoModal({ isOpen, onClose }: ChurrascoModalProps)
             <div className="relative h-[min(58svh,31rem)] w-full bg-[#2B2B2B]">
               <Image src="/images/Churrasco.png" alt="Churrasco que ainda vamos preparar" fill sizes="(max-width: 640px) 100vw, 672px" quality={100} className="object-contain" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2B2B2B]/65 via-transparent to-transparent" />
-              <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar modal do churrasco" className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/70 bg-[#2B2B2B]/40 text-2xl text-white backdrop-blur-md transition hover:rotate-90 hover:bg-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">×</button>
+              <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Fechar modal do churrasco" className="modal-close-button absolute right-5 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/70 bg-[#2B2B2B]/40 text-2xl text-white backdrop-blur-md transition hover:rotate-90 hover:bg-[#D97736] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">×</button>
             </div>
             <div className="relative p-6 sm:p-9">
               <span className="font-inter text-[10px] font-semibold uppercase tracking-[0.24em] text-[#D97736]">Um plano delicioso</span>
