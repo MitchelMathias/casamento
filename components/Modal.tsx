@@ -9,7 +9,7 @@ type ModalProps = {
 };
 
 const gifts = [
-  { position: "01", name: "Viagem para Capão do Leão", giver: "Luciano" },
+  { position: "01", name: "Viagem para Capão da Canoa", giver: "Luciano" },
   { position: "02", name: "Geladeira Nova", giver: "Cleber e Jania" },
   { position: "03", name: "Pix de R$ 150", giver: "Anônimo" },
 ];
