@@ -31,6 +31,41 @@ html {
   scroll-behavior: smooth;
 }
 
+.page-loader {
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: #fafaf7;
+  color: #2b2b2b;
+}
+
+.page-loader__mark {
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #d97736;
+}
+
+.page-loader__mark span {
+  margin-left: -0.25rem;
+  color: #556b2f;
+}
+
+.page-loader__line {
+  width: 3rem;
+  height: 1px;
+  transform-origin: left;
+  background: #d97736;
+  animation: page-loader-line 700ms ease-in-out infinite alternate;
+}
+
+@keyframes page-loader-line {
+  from { transform: scaleX(0.25); opacity: 0.35; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
