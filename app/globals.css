@@ -113,6 +113,21 @@ html {
   mix-blend-mode: multiply;
 }
 
+.halftone-canvas {
+  transform: scale(1.04);
+  transform-origin: center;
+  will-change: transform;
+  animation: halftone-drift 18s ease-in-out infinite alternate;
+}
+
+.ambient-terracotta {
+  animation: ambient-terracotta 14s ease-in-out infinite alternate;
+}
+
+.ambient-olive {
+  animation: ambient-olive 17s ease-in-out infinite alternate;
+}
+
 /* Chromium no Windows pode rasterizar cada frame novamente quando combina
    blur de fundo, filtros grandes e blend modes. Mantemos o aspecto translúcido,
    mas removemos apenas os filtros mais caros nessa plataforma. */
@@ -214,10 +229,28 @@ html.windows-performance .performance-ambient-blur {
   }
 }
 
+@keyframes halftone-drift {
+  from { transform: translate3d(-0.6%, -0.4%, 0) scale(1.04) rotate(-0.15deg); }
+  to { transform: translate3d(0.6%, 0.4%, 0) scale(1.08) rotate(0.15deg); }
+}
+
+@keyframes ambient-terracotta {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1.08) rotate(6deg); }
+}
+
+@keyframes ambient-olive {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(0.92) rotate(-10deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .header-logo,
   .header-glass__glow,
-  .header-cta::after {
+  .header-cta::after,
+  .halftone-canvas,
+  .ambient-terracotta,
+  .ambient-olive {
     animation: none;
   }
 }

@@ -85,8 +85,6 @@ export default function Hero() {
     setActiveImage((current) => (current + 1) % galleryImages.length);
   };
   const { smoothX, smoothY } = useMouseParallax();
-  const backgroundX = useTransform(smoothX, [-1, 1], [-35, 35]);
-  const backgroundY = useTransform(smoothY, [-1, 1], [-25, 25]);
   const textX = useTransform(smoothX, [-1, 1], [-46, 46]);
   const textY = useTransform(smoothY, [-1, 1], [-28, 28]);
   const textRotate = useTransform(smoothX, [-1, 1], [-1.5, 1.5]);
@@ -96,24 +94,16 @@ export default function Hero() {
   const cardRotateY = useTransform(smoothX, [-1, 1], [-12, 12]);
   const accentX = useTransform(smoothX, [-1, 1], [-58, 58]);
   const accentY = useTransform(smoothY, [-1, 1], [40, -40]);
-  const oliveX = useTransform(smoothX, [-1, 1], [42, -42]);
-  const oliveY = useTransform(smoothY, [-1, 1], [30, -30]);
 
   return (
     <main className="relative isolate min-h-[calc(100svh-1rem)] overflow-hidden bg-[#FAFAF7] text-[#2B2B2B]">
       <HalftoneBackground className="z-0 opacity-55 mix-blend-multiply" />
-      <motion.div
-        style={{ x: backgroundX, y: backgroundY }}
-        animate={{ scale: [1, 1.08, 1], rotate: [0, 6, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="performance-ambient-blur pointer-events-none absolute -right-40 -top-24 -z-10 h-[28rem] w-[28rem] rounded-[42%_58%_65%_35%] bg-[#D97736]/14 blur-3xl"
+      <div
+        className="ambient-terracotta performance-ambient-blur pointer-events-none absolute -right-40 -top-24 -z-10 h-[28rem] w-[28rem] rounded-[42%_58%_65%_35%] bg-[#D97736]/14 blur-3xl"
         aria-hidden="true"
       />
-      <motion.div
-        style={{ x: oliveX, y: oliveY }}
-        animate={{ scale: [1, 0.92, 1], rotate: [0, -10, 0] }}
-        transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
-        className="performance-ambient-blur pointer-events-none absolute -bottom-48 -left-40 -z-10 h-[34rem] w-[34rem] rounded-[65%_35%_42%_58%] bg-[#556B2F]/12 blur-3xl"
+      <div
+        className="ambient-olive performance-ambient-blur pointer-events-none absolute -bottom-48 -left-40 -z-10 h-[34rem] w-[34rem] rounded-[65%_35%_42%_58%] bg-[#556B2F]/12 blur-3xl"
         aria-hidden="true"
       />
       <div className="hero-grain pointer-events-none absolute inset-0 -z-10 opacity-30" aria-hidden="true" />
