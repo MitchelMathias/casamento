@@ -132,7 +132,7 @@ export default function Hero() {
 
                 Se por ventura você estiver financeiramente bem e quiser fazer parte desse marco, qualquer quantia será muito bem-vinda.
 
-                Mas não se sinta de forma alguma na obrigação. A intenção é só deixar a oportunidade para quem puder e quiser abençoar esse momento com a gente.
+                Mas não se sinta de forma alguma na obrigação. A intenção é só deixar a oportunidade para quem puder e quiser abençoar esse momento com a.
 
               </p>
               <span className="self-end font-serif text-5xl italic leading-none text-[#D97736]/65 sm:text-6xl">E&amp;M</span>
