@@ -26,14 +26,8 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
     const context = canvas.getContext("2d", { alpha: true });
     if (!context) return;
 
-    let animationFrame = 0;
     let width = 0;
     let height = 0;
-    let reducedMotion = false;
-    let isPageVisible = document.visibilityState === "visible";
-    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const lowPowerDevice = (navigator.hardwareConcurrency || 4) <= 4 || connection?.saveData === true;
-    const startedAt = performance.now();
     let points: HalftonePoint[] = [];
 
     const resize = () => {
@@ -74,8 +68,9 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
       }
     };
 
-    const draw = (now: number) => {
-      const elapsed = reducedMotion ? 0 : (now - startedAt) * 0.00045;
+    const draw = () => {
+      // O primeiro frame mantém o aspecto do efeito sem um loop contínuo de CPU/GPU.
+      const elapsed = 0;
       const paths = Array.from({ length: 12 }, () => new Path2D());
 
       context.clearRect(0, 0, width, height);
@@ -103,36 +98,17 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
       }
       context.globalAlpha = 1;
 
-      if (!reducedMotion && !lowPowerDevice && isPageVisible) {
-        animationFrame = requestAnimationFrame(draw);
-      }
     };
-
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    reducedMotion = motionQuery.matches;
-    const handleMotionPreference = () => {
-      reducedMotion = motionQuery.matches;
-      cancelAnimationFrame(animationFrame);
-      draw(performance.now());
-    };
-    const handleVisibilityChange = () => {
-      isPageVisible = document.visibilityState === "visible";
-      cancelAnimationFrame(animationFrame);
-      if (isPageVisible) draw(performance.now());
-    };
-
-    motionQuery.addEventListener("change", handleMotionPreference);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
     resize();
-    const resizeObserver = new ResizeObserver(resize);
+    draw();
+    const resizeObserver = new ResizeObserver(() => {
+      resize();
+      draw();
+    });
     resizeObserver.observe(canvas);
-    animationFrame = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
-      motionQuery.removeEventListener("change", handleMotionPreference);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
