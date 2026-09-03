@@ -28,7 +28,14 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
 
     let width = 0;
     let height = 0;
+    let animationFrame = 0;
+    let animationTimer = 0;
+    let isPageVisible = document.visibilityState === "visible";
+    let reducedMotion = false;
+    const isWindows = /Windows/i.test(navigator.userAgent);
+    const animateCanvas = !isWindows;
     let points: HalftonePoint[] = [];
+    const startedAt = performance.now();
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
@@ -68,9 +75,8 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
       }
     };
 
-    const draw = () => {
-      // O primeiro frame mantém o aspecto do efeito sem um loop contínuo de CPU/GPU.
-      const elapsed = 0;
+    const draw = (now: number) => {
+      const elapsed = reducedMotion ? 0 : (now - startedAt) * 0.00045;
       const paths = Array.from({ length: 12 }, () => new Path2D());
 
       context.clearRect(0, 0, width, height);
@@ -98,17 +104,44 @@ export default function HalftoneBackground({ className = "" }: HalftoneBackgroun
       }
       context.globalAlpha = 1;
 
+      if (animateCanvas && !reducedMotion && isPageVisible) {
+        animationTimer = window.setTimeout(() => {
+          animationFrame = requestAnimationFrame(draw);
+        }, 32);
+      }
+
     };
     resize();
-    draw();
+    draw(performance.now());
     const resizeObserver = new ResizeObserver(() => {
+      window.clearTimeout(animationTimer);
       resize();
-      draw();
+      draw(performance.now());
     });
     resizeObserver.observe(canvas);
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reducedMotion = motionQuery.matches;
+    const handleMotionPreference = () => {
+      reducedMotion = motionQuery.matches;
+      window.clearTimeout(animationTimer);
+      cancelAnimationFrame(animationFrame);
+      draw(performance.now());
+    };
+    const handleVisibilityChange = () => {
+      isPageVisible = document.visibilityState === "visible";
+      window.clearTimeout(animationTimer);
+      cancelAnimationFrame(animationFrame);
+      if (isPageVisible) draw(performance.now());
+    };
+    motionQuery.addEventListener("change", handleMotionPreference);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
+      window.clearTimeout(animationTimer);
+      cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
+      motionQuery.removeEventListener("change", handleMotionPreference);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 

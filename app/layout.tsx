@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Syne } from "next/font/google";
+import PerformanceTuning from "@/components/PerformanceTuning";
 import "./globals.css";
 
 const syne = Syne({
@@ -23,7 +24,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${syne.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <PerformanceTuning />
+        {children}
+      </body>
     </html>
   );
 }

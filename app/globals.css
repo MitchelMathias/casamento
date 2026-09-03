@@ -78,6 +78,20 @@ html {
   mix-blend-mode: multiply;
 }
 
+/* Chromium no Windows pode rasterizar cada frame novamente quando combina
+   blur de fundo, filtros grandes e blend modes. Mantemos o aspecto translúcido,
+   mas removemos apenas os filtros mais caros nessa plataforma. */
+html.windows-performance [class*="backdrop-blur"],
+html.windows-performance [class*="blur-"] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  filter: none !important;
+}
+
+html.windows-performance .hero-grain {
+  display: none;
+}
+
 .header-glass {
   isolation: isolate;
   overflow: hidden;
