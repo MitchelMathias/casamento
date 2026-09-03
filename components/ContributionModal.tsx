@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { createPortal } from "react-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ContributionModalProps = {
   isOpen: boolean;
@@ -12,6 +12,29 @@ type ContributionModalProps = {
 
 export default function ContributionModal({ isOpen, onClose }: ContributionModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copyPixKey = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText("02946689000");
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = "02946689000";
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      setCopied(false);
+    }
+  };
 
   useEffect(() => {
     if (!isOpen) return;
@@ -68,7 +91,12 @@ export default function ContributionModal({ isOpen, onClose }: ContributionModal
                 </div>
                 <div className="font-inter">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#D97736]">Ou use a chave Pix</span>
-                  <p className="mt-2 rounded-xl border border-[#E5DDCF] bg-white/70 px-4 py-3 text-sm font-semibold tracking-[0.08em] text-[#2B2B2B]">02946689000</p>
+                  <div className="mt-2 flex items-stretch overflow-hidden rounded-xl border border-[#E5DDCF] bg-white/70">
+                    <p className="min-w-0 flex-1 px-4 py-3 text-sm font-semibold tracking-[0.08em] text-[#2B2B2B]">02946689000</p>
+                    <button type="button" onClick={copyPixKey} aria-label="Copiar chave Pix" className="shrink-0 border-l border-[#E5DDCF] px-3 text-xs font-semibold text-[#D97736] transition-colors hover:bg-[#F7F3ED] hover:text-[#BD6128] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#D97736]">
+                      {copied ? "Copiado!" : "Copiar"}
+                    </button>
+                  </div>
                   <p className="mt-3 text-xs leading-5 text-[#81786D]">Não existe valor certo ou obrigação. Seu carinho e amizade já são presentes enormes.</p>
                 </div>
               </div>
