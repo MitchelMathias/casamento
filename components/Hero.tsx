@@ -128,11 +128,8 @@ export default function Hero() {
 
             <motion.div variants={clipReveal} initial="hidden" animate="show" transition={{ delay: 0.95, duration: 1.1, ease: easeOut }} className="mt-6 grid gap-5 rounded-2xl border border-[#D8CDBD]/80 bg-white/55 p-3.5 shadow-[0_8px_20px_rgba(73,54,35,0.06)] sm:mt-8 sm:max-w-2xl sm:grid-cols-[1fr_auto] sm:gap-8 sm:p-4">
               <p className="max-w-xl text-base leading-7 text-[#5E5E5E] sm:text-lg sm:leading-8">
-                Felizmente vamos casar!. Mas, como a crise tá braba ksksks, resolvi criar esse site para alguns dos meus amigos mais próximos e familiares.
-
-                Se por ventura você estiver financeiramente bem e quiser fazer parte desse marco, qualquer quantia será muito bem-vinda.
-
-                Mas não se sinta de forma alguma na obrigação. A intenção é só deixar a oportunidade para quem puder e quiser abençoar esse momento com a.
+                <span className="block">Felizmente vamos casar! E como a vida de recém-casados não vem com casa mobiliada, este cantinho é uma contribuição totalmente opcional para ajudar na mobília da nossa casa nova.</span>
+                <span className="mt-6 block">Se, por acaso, você quiser fazer parte desse marco, qualquer quantia será muito bem-vinda. Mas não se sinta pressionado. A intenção é apenas deixar a oportunidade para quem quiser e puder abençoar esse nosso momento tão especial.</span>
 
               </p>
               <span className="self-end font-serif text-5xl italic leading-none text-[#D97736]/65 sm:text-6xl">E&amp;M</span>
